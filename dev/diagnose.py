@@ -46,8 +46,12 @@ for row in rows:
     lines = solver.body_lines(it["text"])
     keep = [i for i, l in enumerate(lines) if pipeline.mentions_vocab(l, h)]
     numbered = [(n + 1, idx) for n, idx in enumerate(keep)]
-    got = pipeline.parse_reply(row["reply"], numbered, h)
-    for _, idx in numbered:
+    got = pipeline.parse_reply(row["reply"], numbered, h, lines, True)
+    raw = {}
+    for r in row["reply"].splitlines():
+        mm = re.match(r"^\s*\**\s*L?(\d+)\s*[:.)\-]\s*(.*)$", r)
+        if mm: raw[int(mm.group(1))] = mm.group(2)
+    for num, idx in numbered:
         c = oracle.extract(lines[idx], TAKEOVER)
         truth = sorted([to_tuple(c)]) if c else []
         mine = sorted(got.get(idx, []))
@@ -64,8 +68,8 @@ for row in rows:
         kinds[kind] += 1
         pat = pattern(lines[idx], h)
         by_pattern[kind][pat] += 1
-        if len(examples[pat]) < 2:
-            examples[pat].append(f"{lines[idx]}\n        truth: {truth}\n        model: {mine}")
+        if len(examples[(kind, pat)]) < 2:
+            examples[(kind, pat)].append(f"{lines[idx]}\n        truth: {truth}\n        model wrote: {raw.get(num, '(nothing)')}\n        parsed as: {mine}")
 
 print(f"lines checked: {total}")
 for k, v in kinds.most_common():
@@ -74,5 +78,5 @@ for kind in by_pattern:
     print(f"\n=== {kind} -- top patterns ===")
     for pat, n in by_pattern[kind].most_common(8):
         print(f"{n:3d}  {pat}")
-        for e in examples[pat][:1]:
+        for e in examples[(kind, pat)][:1]:
             print(f"      e.g. {e}")

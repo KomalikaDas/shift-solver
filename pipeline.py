@@ -4,7 +4,8 @@ Per item:
   1. read the header symbolically (names, blocks, stations)
   2. prefilter: lines that mention no person, block or station go straight to NONE
   3. ask the model to translate each remaining line into the constraint language
-  4. validate the model's output against the header vocabulary
+  4. validate the model's output: known names only, and grounding (everything
+     a constraint mentions must appear in its own line)
   5. at 3x/10x, repeat step 3 and combine the samples (vote + plausibility)
   6. enumerate every rota and decide unique / ambiguous / inconsistent
 """
@@ -35,9 +36,13 @@ def mentions_vocab(line, h):
 
 
 # ---------- step 4: parse and validate one model reply ---------------------
+OPS = {"AT", "NOT_AT", "ON", "NOT_ON", "BEFORE", "AFTER",
+       "JUST_BEFORE", "JUST_AFTER", "BETWEEN", "NEXT"}
+
+
 def _term(tok, h):
     """Map a token to a canonical person or station, or None."""
-    t = tok.strip(" ,.;:'\"()<>[]")
+    t = tok.strip(" ,.;:'\"()<>[]*`")
     t = re.sub(r"'s$", "", t)
     for p in h["staff"]:
         if t.lower() == p.lower():
@@ -48,44 +53,78 @@ def _term(tok, h):
     return None
 
 
+def _canon(op, subj, args, h):
+    """Infix pieces -> one canonical constraint tuple, or None if malformed."""
+    if op in ("AT", "NOT_AT"):
+        blk = solver.norm_time(" ".join(args))
+        x = _term(subj, h) if subj else None
+        return (op, x, blk) if x and blk in h["blocks"] else None
+    if op in ("ON", "NOT_ON"):
+        p = _term(subj, h) if subj else None
+        s = next((t for t in (_term(a, h) for a in args) if t in h["stations"]), None)
+        return (op, p, s) if p in h["staff"] and s else None
+    terms = [t for t in (_term(a, h) for a in args) if t]
+    x = _term(subj, h) if subj else None
+    if x is None:
+        return None
+    if op == "BETWEEN":
+        if len(terms) < 2 or len({x, terms[0], terms[1]}) < 3:
+            return None
+        return ("BETWEEN", x) + tuple(sorted(terms[:2]))
+    if not terms or terms[0] == x:
+        return None
+    y = terms[0]
+    return {"BEFORE": ("BEFORE", x, y), "AFTER": ("BEFORE", y, x),
+            "JUST_BEFORE": ("NEXT", x, y), "JUST_AFTER": ("NEXT", y, x),
+            "NEXT": ("NEXT", x, y)}[op]
+
+
 def parse_reading(text, h):
-    """One constraint string -> list of valid constraint tuples."""
+    """One constraint string -> list of constraint tuples.
+    Accepts the infix form the prompt asks for ("Samuel BETWEEN Meera Priya")
+    and, as a fallback, prefix form ("BETWEEN Samuel Meera Priya")."""
     out = []
     for piece in text.split(";"):
-        toks = piece.split()
-        if not toks:
+        toks = piece.replace(",", " ").split()
+        clean = [t.upper().strip(":*`") for t in toks]
+        pos = next((i for i, t in enumerate(clean) if t in OPS), None)
+        if pos is None:
             continue
-        op = toks[0].upper().strip(":,")
-        if op not in OPS:
-            continue
-        args = toks[1:]
-        if op in ("AT", "NOT_AT"):
-            if len(args) < 2:
-                continue
-            x, blk = _term(args[0], h), solver.norm_time(" ".join(args[1:]))
-            if x and blk in h["blocks"]:
-                out.append((op, x, blk))
-        elif op in ("ON", "NOT_ON"):
-            if len(args) < 2:
-                continue
-            p, s = _term(args[0], h), _term(args[1], h)
-            if p in h["staff"] and s in h["stations"]:
-                out.append((op, p, s))
+        op = clean[pos]
+        rest = [t for t in toks[pos + 1:] if t.lower() != "and"]
+        before = [t for t in toks[:pos] if _term(t, h)]
+        if before:
+            subj, args = before[-1], rest
+        elif rest:  # prefix fallback
+            subj, args = rest[0], rest[1:]
         else:
-            terms = [_term(a, h) for a in args]
-            terms = [t for t in terms if t]
-            if len(terms) < OPS[op] or len(set(terms[:OPS[op]])) < OPS[op]:
-                continue  # wrong arity or a person related to themselves
-            if op == "BETWEEN":
-                m, x, y = terms[:3]
-                out.append((op, m) + tuple(sorted((x, y))))
-            else:
-                out.append((op, terms[0], terms[1]))
+            continue
+        c = _canon(op, subj, args, h)
+        if c:
+            out.append(c)
     return out
 
 
-def parse_reply(reply, numbered, h):
-    """Model reply -> {line_index: [constraints]} for the lines it was shown."""
+def grounded(c, line, h):
+    """Every person, station and block in the constraint appears in the line."""
+    low = line.lower()
+    for x in c[1:]:
+        if x in h["staff"]:
+            if not re.search(r"\b" + re.escape(x) + r"\b", line):
+                return False
+        elif x in h["stations"]:
+            if not re.search(r"\b" + re.escape(x.lower()) + r"\b", low):
+                return False
+        elif x in h["blocks"]:
+            if solver.norm_time(x) not in {solver.norm_time(m) for m in
+                                           re.findall(r"\d{1,2}:\d{2}", line)}:
+                return False
+    return True
+
+
+def parse_reply(reply, numbered, h, lines=None, ground=True):
+    """Model reply -> {line_index: [constraints]} for the lines it was shown.
+    With ground=True, constraints naming anything absent from their line are dropped."""
     wanted = {n: idx for n, idx in numbered}
     readings = {idx: [] for idx in wanted.values()}
     for raw in reply.splitlines():
@@ -93,7 +132,10 @@ def parse_reply(reply, numbered, h):
         if not m or int(m.group(1)) not in wanted:
             continue
         idx = wanted[int(m.group(1))]
-        readings[idx] = sorted(set(readings[idx] + parse_reading(m.group(2), h)))
+        cs = parse_reading(m.group(2), h)
+        if ground and lines is not None:
+            cs = [c for c in cs if grounded(c, lines[idx], h)]
+        readings[idx] = sorted(set(readings[idx] + cs))
     return readings
 
 
@@ -172,7 +214,7 @@ def solve_item(item, n_calls, cfg, call, log):
             log.append({"id": item["id"], "call": k, "error": repr(e)})
             continue
         log.append({"id": item["id"], "call": k, "reply": reply})
-        samples.append(parse_reply(reply, numbered, h))
+        samples.append(parse_reply(reply, numbered, h, lines, cfg["grounding"]))
     if not samples:
         samples = [{idx: [] for _, idx in numbered}]
 
@@ -196,7 +238,7 @@ def run(items, budget, cfg, call, workers=6):
     return answers, log
 
 
-DEFAULT_CFG = {"prefilter": True, "examples": True, "noise_rules": True,
+DEFAULT_CFG = {"prefilter": True, "grounding": True, "examples": True, "noise_rules": True,
                "vote": True, "plausibility": True, "direct": False}
 
 
@@ -207,13 +249,13 @@ def main(argv=None):
     ap.add_argument("--out", required=True)
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--log", default=None, help="where to save raw model replies (jsonl)")
-    for name in ("prefilter", "examples", "noise-rules", "vote", "plausibility"):
+    for name in ("prefilter", "grounding", "examples", "noise-rules", "vote", "plausibility"):
         ap.add_argument(f"--no-{name}", action="store_true")
     ap.add_argument("--direct", action="store_true", help="baseline: model answers directly")
     a = ap.parse_args(argv)
 
     cfg = dict(DEFAULT_CFG)
-    for name in ("prefilter", "examples", "noise_rules", "vote", "plausibility"):
+    for name in ("prefilter", "grounding", "examples", "noise_rules", "vote", "plausibility"):
         if getattr(a, "no_" + name):
             cfg[name] = False
     cfg["direct"] = a.direct
