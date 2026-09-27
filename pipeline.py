@@ -42,7 +42,7 @@ OPS = {"AT", "NOT_AT", "ON", "NOT_ON", "BEFORE", "AFTER",
 
 def _term(tok, h):
     """Map a token to a canonical person or station, or None."""
-    t = tok.strip(" ,.;:'\"()<>[]*`")
+    t = tok.strip(" ,.;:'\"()<>[]*`\u201c\u201d")
     t = re.sub(r"'s$", "", t)
     for p in h["staff"]:
         if t.lower() == p.lower():
@@ -53,16 +53,39 @@ def _term(tok, h):
     return None
 
 
+def _typed(tokens, h):
+    """Sort tokens into people, stations and blocks."""
+    people, stations, blocks = [], [], []
+    for tok in tokens:
+        t = _term(tok, h)
+        if t in h["staff"]:
+            people.append(t)
+        elif t in h["stations"]:
+            stations.append(t)
+        else:
+            b = solver.norm_time(tok)
+            if b in h["blocks"]:
+                blocks.append(b)
+    return people, stations, blocks
+
+
 def _canon(op, subj, args, h):
-    """Infix pieces -> one canonical constraint tuple, or None if malformed."""
-    if op in ("AT", "NOT_AT"):
-        blk = solver.norm_time(" ".join(args))
-        x = _term(subj, h) if subj else None
-        return (op, x, blk) if x and blk in h["blocks"] else None
-    if op in ("ON", "NOT_ON"):
-        p = _term(subj, h) if subj else None
-        s = next((t for t in (_term(a, h) for a in args) if t in h["stations"]), None)
-        return (op, p, s) if p in h["staff"] and s else None
+    """Infix pieces -> one canonical constraint tuple, or None if malformed.
+    Type-directed repair: AT/ON are chosen by what the argument IS, so
+    'Ayesha NOT_AT calibration' becomes NOT_ON (calibration is a station, not a
+    block) and 'NOT_ON calibration Ayesha' is read by type, not position."""
+    neg = op.startswith("NOT_")
+    if op in ("AT", "NOT_AT", "ON", "NOT_ON"):
+        people, stations, blocks = _typed(([subj] if subj else []) + args, h)
+        if blocks:
+            x = people[0] if people else (stations[0] if stations else None)
+            return ("NOT_AT" if neg else "AT", x, blocks[0]) if x else None
+        if not (people and stations):
+            return None
+        # AT given a station is only repaired to ON when a person is the subject
+        if op in ("AT", "NOT_AT") and _term(subj or "", h) not in h["staff"]:
+            return None
+        return ("NOT_ON" if neg else "ON", people[0], stations[0])
     terms = [t for t in (_term(a, h) for a in args) if t]
     x = _term(subj, h) if subj else None
     if x is None:
@@ -79,29 +102,46 @@ def _canon(op, subj, args, h):
             "NEXT": ("NEXT", x, y)}[op]
 
 
-def parse_reading(text, h):
-    """One constraint string -> list of constraint tuples.
-    Accepts the infix form the prompt asks for ("Samuel BETWEEN Meera Priya")
-    and, as a fallback, prefix form ("BETWEEN Samuel Meera Priya")."""
+THINKING = re.compile(r"->|\u2192|\?|\bso\b|\bmeans\b|\bbut\b|\bactually\b", re.I)
+
+
+def _candidates(text, h):
+    """Every well-formed constraint in a piece of text, in order of appearance.
+    Keywords must be in capitals, so ordinary words like 'on' or 'at' in the
+    model's commentary are never read as constraints."""
+    toks = text.replace(",", " ").split()
+    clean = [t.strip(":*`.()[]\"'\u201c\u201d") for t in toks]
     out = []
-    for piece in text.split(";"):
-        toks = piece.replace(",", " ").split()
-        clean = [t.upper().strip(":*`") for t in toks]
-        pos = next((i for i, t in enumerate(clean) if t in OPS), None)
-        if pos is None:
+    for pos, word in enumerate(clean):
+        if word not in OPS:
             continue
-        op = clean[pos]
-        rest = [t for t in toks[pos + 1:] if t.lower() != "and"]
+        stop = next((j for j in range(pos + 1, len(clean)) if clean[j] in OPS), len(clean))
+        rest = [t for t in toks[pos + 1:stop] if t.lower() != "and"]
         before = [t for t in toks[:pos] if _term(t, h)]
         if before:
             subj, args = before[-1], rest
-        elif rest:  # prefix fallback
+        elif rest:  # prefix fallback: "BETWEEN Samuel Meera Priya"
             subj, args = rest[0], rest[1:]
         else:
             continue
-        c = _canon(op, subj, args, h)
+        c = _canon(word, subj, args, h)
         if c:
             out.append(c)
+    return out
+
+
+def parse_reading(text, h, last_only=True):
+    """One reply line -> list of constraint tuples.
+    Granite often reasons out loud even with thinking disabled, quoting the line
+    and ending with its answer. When the line shows that, only the LAST
+    constraint is kept. An echoed note never yields a constraint, because
+    keywords must be in capitals and the notes contain none."""
+    if last_only and THINKING.search(text):
+        found = _candidates(text, h)
+        return found[-1:]
+    out = []
+    for piece in text.split(";"):
+        out += _candidates(piece, h)
     return out
 
 
@@ -122,7 +162,7 @@ def grounded(c, line, h):
     return True
 
 
-def parse_reply(reply, numbered, h, lines=None, ground=True):
+def parse_reply(reply, numbered, h, lines=None, ground=True, last_only=True):
     """Model reply -> {line_index: [constraints]} for the lines it was shown.
     With ground=True, constraints naming anything absent from their line are dropped."""
     wanted = {n: idx for n, idx in numbered}
@@ -132,7 +172,7 @@ def parse_reply(reply, numbered, h, lines=None, ground=True):
         if not m or int(m.group(1)) not in wanted:
             continue
         idx = wanted[int(m.group(1))]
-        cs = parse_reading(m.group(2), h)
+        cs = parse_reading(m.group(2), h, last_only)
         if ground and lines is not None:
             cs = [c for c in cs if grounded(c, lines[idx], h)]
         readings[idx] = sorted(set(readings[idx] + cs))
@@ -214,7 +254,7 @@ def solve_item(item, n_calls, cfg, call, log):
             log.append({"id": item["id"], "call": k, "error": repr(e)})
             continue
         log.append({"id": item["id"], "call": k, "reply": reply})
-        samples.append(parse_reply(reply, numbered, h, lines, cfg["grounding"]))
+        samples.append(parse_reply(reply, numbered, h, lines, cfg["grounding"], cfg["last_answer"]))
     if not samples:
         samples = [{idx: [] for _, idx in numbered}]
 
@@ -238,7 +278,7 @@ def run(items, budget, cfg, call, workers=6):
     return answers, log
 
 
-DEFAULT_CFG = {"prefilter": True, "grounding": True, "examples": True, "noise_rules": True,
+DEFAULT_CFG = {"prefilter": True, "grounding": True, "last_answer": True, "examples": True, "noise_rules": True,
                "vote": True, "plausibility": True, "direct": False}
 
 
@@ -249,13 +289,13 @@ def main(argv=None):
     ap.add_argument("--out", required=True)
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--log", default=None, help="where to save raw model replies (jsonl)")
-    for name in ("prefilter", "grounding", "examples", "noise-rules", "vote", "plausibility"):
+    for name in ("prefilter", "grounding", "last-answer", "examples", "noise-rules", "vote", "plausibility"):
         ap.add_argument(f"--no-{name}", action="store_true")
     ap.add_argument("--direct", action="store_true", help="baseline: model answers directly")
     a = ap.parse_args(argv)
 
     cfg = dict(DEFAULT_CFG)
-    for name in ("prefilter", "grounding", "examples", "noise_rules", "vote", "plausibility"):
+    for name in ("prefilter", "grounding", "last_answer", "examples", "noise_rules", "vote", "plausibility"):
         if getattr(a, "no_" + name):
             cfg[name] = False
     cfg["direct"] = a.direct

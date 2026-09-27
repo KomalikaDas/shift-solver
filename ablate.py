@@ -17,6 +17,7 @@ ARMS = {
     "full system":        {},
     "no prefilter":       {"prefilter": False},
     "no grounding":       {"grounding": False},
+    "no last-answer parse": {"last_answer": False},
     "no examples":        {"examples": False},
     "no noise rules":     {"noise_rules": False},
     "no vote":            {"vote": False},
