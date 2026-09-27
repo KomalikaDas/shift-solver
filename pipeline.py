@@ -247,7 +247,10 @@ def direct_answer(item, h, call):
            '{"case": "unique", "assignment": {name: {"block": .., "station": ..}}}\n'
            '{"case": "ambiguous", "assignments": [ ... ]}\n'
            '{"case": "inconsistent", "conflicts": ["<statement quoted in full>", ...]}')
-    reply = call(item["id"], [{"role": "user", "content": ask}])
+    try:
+        reply = call(item["id"], [{"role": "user", "content": ask}])
+    except Exception as e:  # no retries, as everywhere else
+        return {"case": "unique", "assignment": {}}, "ERROR " + repr(e)
     m = re.search(r"\{.*\}", reply, re.S)
     try:
         return json.loads(m.group(0)), reply
