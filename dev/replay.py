@@ -20,7 +20,7 @@ import pipeline
 
 ap = argparse.ArgumentParser()
 ap.add_argument("log")
-for name in ("prefilter", "grounding", "last-answer", "vote", "plausibility"):
+for name in ("prefilter", "grounding", "last-answer", "disjunction", "vote", "plausibility"):
     ap.add_argument(f"--no-{name}", action="store_true")
 a = ap.parse_args()
 
@@ -41,7 +41,7 @@ def replay_call(item_id, messages):
 
 
 cfg = dict(pipeline.DEFAULT_CFG)
-for name in ("prefilter", "grounding", "last_answer", "vote", "plausibility"):
+for name in ("prefilter", "grounding", "last_answer", "disjunction", "vote", "plausibility"):
     if getattr(a, "no_" + name):
         cfg[name] = False
 items = json.loads((ROOT / "data/items.json").read_text(encoding="utf-8"))

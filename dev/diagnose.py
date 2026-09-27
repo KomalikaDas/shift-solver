@@ -56,7 +56,8 @@ for row in rows:
         truth = sorted([to_tuple(c)]) if c else []
         mine = sorted(got.get(idx, []))
         total += 1
-        if mine == truth:
+        if mine == truth or (mine and truth and
+                             solver.solutions(h, {0: mine}) == solver.solutions(h, {0: truth})):
             kinds["correct"] += 1
             continue
         if not truth:

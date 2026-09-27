@@ -58,6 +58,8 @@ def _pos(term, world, h):
 def holds(c, world, h):
     op = c[0]
     blk, st = world
+    if op == "OR":  # ("OR", (alt1, alt2, ...)), each alt a tuple of constraints
+        return any(all(holds(x, world, h) for x in alt) for alt in c[1])
     if op in ("AT", "NOT_AT"):
         p = _pos(c[1], world, h)
         ok = p is not None and h["blocks"][p] == c[2]

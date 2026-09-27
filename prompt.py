@@ -1,4 +1,7 @@
-"""The extraction prompt (v2). The model only translates; it never solves.
+"""The extraction prompt (v3: v2 plus one rule on handover direction, after
+v2 read 'A relieves B' as A before B in 9 of the visible lines).
+
+The extraction prompt (v2). The model only translates; it never solves.
 
 v1 -> v2, each change answering a failure measured with dev/diagnose.py on the
 first 1x run (see README):
@@ -27,6 +30,9 @@ NOISE_RULES = """How to read the lines:
 - Hedges do not weaken anything. "I think", "as far as I know", "I'm fairly sure",
   "from memory" and similar: translate the statement as a plain fact.
 - A line that repeats another ("It bears repeating:" and the like) is translated normally.
+- Direction words: someone who takes over from, relieves or follows another
+  works AFTER them; someone who hands over to another works BEFORE them.
+  "Directly", "straight", "back to back" or "no block in between" make it JUST_.
 - Any line saying one person is between two others is BETWEEN, however it is worded:
   "sits between", "falls between", "after one of them and before the other",
   "whichever way round A and B are, M is between them". M is the one in the middle.

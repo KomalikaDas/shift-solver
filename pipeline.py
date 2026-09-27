@@ -131,22 +131,41 @@ def _candidates(text, h):
 
 
 def parse_reading(text, h, last_only=True):
-    """One reply line -> list of constraint tuples.
-    Granite often reasons out loud even with thinking disabled, quoting the line
-    and ending with its answer. When the line shows that, only the LAST
-    constraint is kept. An echoed note never yields a constraint, because
-    keywords must be in capitals and the notes contain none."""
+    """One reply line -> list of pieces, each piece a list of constraints that
+    were joined with ';'. Granite often reasons out loud even with thinking
+    disabled, quoting the line and ending with its answer. When the line shows
+    that, only the LAST constraint is kept. An echoed note never yields a
+    constraint, because keywords must be in capitals and the notes contain none."""
     if last_only and THINKING.search(text):
         found = _candidates(text, h)
-        return found[-1:]
-    out = []
-    for piece in text.split(";"):
-        out += _candidates(piece, h)
-    return out
+        return [found[-1:]] if found else []
+    return [p for p in (_candidates(piece, h) for piece in text.split(";")) if p]
+
+
+def combine_pieces(pieces, h, disjunction=True):
+    """Pieces of one line -> constraints for that line.
+    Normally the pieces all hold ('A ; B' = both). But a single line in these
+    notes never contradicts itself (every real conflict spans 3+ statements),
+    so if the pieces clash on their own, the model was listing alternatives:
+    'X AFTER A AND X BEFORE B ; X AFTER B AND X BEFORE A' is one OR."""
+    flat = [c for p in pieces for c in p]
+    if not flat:
+        return []
+    if solver.solutions(h, {0: flat}):
+        return sorted(set(flat))
+    if disjunction and len(pieces) > 1:
+        alts = [tuple(sorted(set(p))) for p in pieces if solver.solutions(h, {0: p})]
+        if len(alts) > 1:
+            return [("OR", tuple(sorted(set(alts))))]
+        if len(alts) == 1:
+            return list(alts[0])
+    return []  # the line contradicts itself: the reading is broken, drop it
 
 
 def grounded(c, line, h):
     """Every person, station and block in the constraint appears in the line."""
+    if c[0] == "OR":
+        return all(grounded(x, line, h) for alt in c[1] for x in alt)
     low = line.lower()
     for x in c[1:]:
         if x in h["staff"]:
@@ -162,8 +181,9 @@ def grounded(c, line, h):
     return True
 
 
-def parse_reply(reply, numbered, h, lines=None, ground=True, last_only=True):
+def parse_reply(reply, numbered, h, lines=None, ground=True, last_only=True, disjunction=True):
     """Model reply -> {line_index: [constraints]} for the lines it was shown.
+    If the model answers the same line twice, its last answer counts.
     With ground=True, constraints naming anything absent from their line are dropped."""
     wanted = {n: idx for n, idx in numbered}
     readings = {idx: [] for idx in wanted.values()}
@@ -172,10 +192,13 @@ def parse_reply(reply, numbered, h, lines=None, ground=True, last_only=True):
         if not m or int(m.group(1)) not in wanted:
             continue
         idx = wanted[int(m.group(1))]
-        cs = parse_reading(m.group(2), h, last_only)
+        cs = combine_pieces(parse_reading(m.group(2), h, last_only), h, disjunction)
         if ground and lines is not None:
             cs = [c for c in cs if grounded(c, lines[idx], h)]
-        readings[idx] = sorted(set(readings[idx] + cs))
+        if last_only:
+            readings[idx] = cs
+        else:
+            readings[idx] = sorted(set(readings[idx] + cs))
     return readings
 
 
@@ -254,7 +277,8 @@ def solve_item(item, n_calls, cfg, call, log):
             log.append({"id": item["id"], "call": k, "error": repr(e)})
             continue
         log.append({"id": item["id"], "call": k, "reply": reply})
-        samples.append(parse_reply(reply, numbered, h, lines, cfg["grounding"], cfg["last_answer"]))
+        samples.append(parse_reply(reply, numbered, h, lines, cfg["grounding"],
+                                   cfg["last_answer"], cfg["disjunction"]))
     if not samples:
         samples = [{idx: [] for _, idx in numbered}]
 
@@ -278,7 +302,22 @@ def run(items, budget, cfg, call, workers=6):
     return answers, log
 
 
-DEFAULT_CFG = {"prefilter": True, "grounding": True, "last_answer": True, "examples": True, "noise_rules": True,
+def replay_call_from(log_rows):
+    """A stand-in for the model that returns saved replies, in the order they
+    were made. Lets the symbolic components be ablated on identical outputs."""
+    import collections
+    q = collections.defaultdict(list)
+    for row in sorted((r for r in log_rows if "reply" in r), key=lambda r: r["call"]):
+        q[row["id"]].append(row["reply"])
+
+    def call(item_id, messages):
+        if not q.get(item_id):
+            raise RuntimeError("no saved reply left for " + item_id)
+        return q[item_id].pop(0)
+    return call
+
+
+DEFAULT_CFG = {"prefilter": True, "grounding": True, "last_answer": True, "disjunction": True, "examples": True, "noise_rules": True,
                "vote": True, "plausibility": True, "direct": False}
 
 
@@ -289,13 +328,15 @@ def main(argv=None):
     ap.add_argument("--out", required=True)
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--log", default=None, help="where to save raw model replies (jsonl)")
-    for name in ("prefilter", "grounding", "last-answer", "examples", "noise-rules", "vote", "plausibility"):
+    for name in ("prefilter", "grounding", "last-answer", "disjunction", "examples", "noise-rules",
+                 "vote", "plausibility"):
         ap.add_argument(f"--no-{name}", action="store_true")
     ap.add_argument("--direct", action="store_true", help="baseline: model answers directly")
     a = ap.parse_args(argv)
 
     cfg = dict(DEFAULT_CFG)
-    for name in ("prefilter", "grounding", "last_answer", "examples", "noise_rules", "vote", "plausibility"):
+    for name in ("prefilter", "grounding", "last_answer", "disjunction", "examples", "noise_rules",
+                 "vote", "plausibility"):
         if getattr(a, "no_" + name):
             cfg[name] = False
     cfg["direct"] = a.direct
