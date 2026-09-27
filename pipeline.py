@@ -69,7 +69,7 @@ def _typed(tokens, h):
     return people, stations, blocks
 
 
-def _canon(op, subj, args, h):
+def _canon(op, subj, args, h, prefix=False):
     """Infix pieces -> one canonical constraint tuple, or None if malformed.
     Type-directed repair: AT/ON are chosen by what the argument IS, so
     'Ayesha NOT_AT calibration' becomes NOT_ON (calibration is a station, not a
@@ -82,8 +82,10 @@ def _canon(op, subj, args, h):
             return ("NOT_AT" if neg else "AT", x, blocks[0]) if x else None
         if not (people and stations):
             return None
-        # AT given a station is only repaired to ON when a person is the subject
-        if op in ("AT", "NOT_AT") and _term(subj or "", h) not in h["staff"]:
+        # AT given a station is repaired to ON when a person is the subject, or
+        # when the keyword came first ('NOT_AT packing Meera'); an infix line
+        # with a station subject ('intake AT earlier than Priya') is rejected
+        if op in ("AT", "NOT_AT") and not prefix and _term(subj or "", h) not in h["staff"]:
             return None
         return ("NOT_ON" if neg else "ON", people[0], stations[0])
     terms = [t for t in (_term(a, h) for a in args) if t]
@@ -118,13 +120,14 @@ def _candidates(text, h):
         stop = next((j for j in range(pos + 1, len(clean)) if clean[j] in OPS), len(clean))
         rest = [t for t in toks[pos + 1:stop] if t.lower() != "and"]
         before = [t for t in toks[:pos] if _term(t, h)]
+        prefix = not before
         if before:
             subj, args = before[-1], rest
         elif rest:  # prefix fallback: "BETWEEN Samuel Meera Priya"
             subj, args = rest[0], rest[1:]
         else:
             continue
-        c = _canon(word, subj, args, h)
+        c = _canon(word, subj, args, h, prefix)
         if c:
             out.append(c)
     return out
