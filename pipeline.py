@@ -305,6 +305,10 @@ def run(items, budget, cfg, call, workers=6):
     with ThreadPoolExecutor(max_workers=workers) as pool:
         futures = {it["id"]: pool.submit(solve_item, it, n_calls, cfg, call, log) for it in items}
         answers = {iid: f.result() for iid, f in futures.items()}
+    failed = [r for r in log if "error" in r or str(r.get("reply", "")).startswith("ERROR ")]
+    if failed:
+        print(f"WARNING: {len(failed)} of {len(log)} model calls failed; first error: "
+              f"{failed[0].get('error') or failed[0].get('reply')}", file=sys.stderr)
     return answers, log
 
 

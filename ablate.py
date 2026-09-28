@@ -3,6 +3,7 @@
 python ablate.py                      # everything (about 3,400 model calls)
 python ablate.py --budgets 1x         # just the 1x column
 python ablate.py --runs 3             # repeat each live run to see the spread
+python ablate.py --out-dir results_kaggle   # keep one backend's numbers apart
 
 Two kinds of component, measured two ways:
 - PROMPT components (prefilter, worked example, noise rules) change what the
@@ -63,13 +64,15 @@ def main():
     ap.add_argument("--budgets", default="1x,3x,10x")
     ap.add_argument("--arms", default=",".join(ORDER))
     ap.add_argument("--workers", type=int, default=6)
+    ap.add_argument("--out-dir", default="results",
+                    help="where the table, numbers and run files go")
     a = ap.parse_args()
 
     from llm import call
     score = load_scorer(a.scorer)
     items = json.loads(Path(a.items).read_text(encoding="utf-8"))
     key = json.loads(Path(a.key).read_text(encoding="utf-8"))
-    out = Path("results")
+    out = Path(a.out_dir)
     (out / "runs").mkdir(parents=True, exist_ok=True)
     res_path = out / "ablation.json"
     results = json.loads(res_path.read_text()) if res_path.exists() else {}
