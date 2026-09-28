@@ -1,0 +1,1342 @@
+{
+ "B2-000": {
+  "case": "unique",
+  "assignment": {
+   "Samuel": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Tomas": {
+    "block": "09:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Rohan": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Ayesha": {
+    "block": "15:00",
+    "station": "intake"
+   }
+  }
+ },
+ "B2-001": {
+  "case": "unique",
+  "assignment": {}
+ },
+ "B2-002": {
+  "case": "unique",
+  "assignment": {
+   "Daniel": {
+    "block": "09:00",
+    "station": null
+   },
+   "Rohan": {
+    "block": "07:00",
+    "station": "calibration"
+   },
+   "Nadia": {
+    "block": "11:00",
+    "station": null
+   },
+   "Priya": {
+    "block": "13:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "15:00",
+    "station": "intake"
+   }
+  }
+ },
+ "B2-003": {
+  "case": "unique",
+  "assignment": {
+   "Priya": {
+    "block": "09:00",
+    "station": "intake"
+   },
+   "Ingrid": {
+    "block": "07:00",
+    "station": null
+   },
+   "Tomas": {
+    "block": "11:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Nadia": {
+    "block": "15:00",
+    "station": "calibration"
+   }
+  }
+ },
+ "B2-004": {
+  "case": "unique",
+  "assignment": {
+   "Ingrid": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Priya": {
+    "block": "15:00",
+    "station": null
+   },
+   "Nadia": {
+    "block": "09:00",
+    "station": null
+   },
+   "Rohan": {
+    "block": "07:00",
+    "station": null
+   },
+   "Samuel": {
+    "block": "13:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-005": {
+  "case": "unique",
+  "assignment": {
+   "Daniel": {
+    "block": "11:00",
+    "station": null
+   },
+   "Priya": {
+    "block": "07:00",
+    "station": "packing"
+   },
+   "Nadia": {
+    "block": "13:00",
+    "station": null
+   },
+   "Lukas": {
+    "block": "15:00",
+    "station": null
+   },
+   "Tomas": {
+    "block": "09:00",
+    "station": null
+   }
+  }
+ },
+ "B2-006": {
+  "case": "unique",
+  "assignment": {
+   "Daniel": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Priya": {
+    "block": "13:00",
+    "station": "calibration"
+   },
+   "Tomas": {
+    "block": "09:00",
+    "station": "packing"
+   },
+   "Nadia": {
+    "block": "11:00",
+    "station": "none"
+   },
+   "Samuel": {
+    "block": "15:00",
+    "station": "none"
+   }
+  }
+ },
+ "B2-007": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Samuel": {
+    "block": "09:00",
+    "station": "none"
+   },
+   "Tomas": {
+    "block": "11:00",
+    "station": "none"
+   },
+   "Ingrid": {
+    "block": "13:00",
+    "station": "calibration"
+   },
+   "Ayesha": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-008": {
+  "case": "unique",
+  "assignment": {
+   "Priya": {
+    "block": "09:00",
+    "station": "packing"
+   },
+   "Nadia": {
+    "block": "07:00",
+    "station": null
+   },
+   "Rohan": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Ingrid": {
+    "block": "13:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "15:00",
+    "station": "calibration"
+   }
+  }
+ },
+ "B2-009": {
+  "case": "unique",
+  "assignment": {
+   "Daniel": {
+    "block": "09:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Rohan": {
+    "block": "09:00",
+    "station": "calibration"
+   },
+   "Priya": {
+    "block": "11:00",
+    "station": "packing"
+   },
+   "Ingrid": {
+    "block": "15:00",
+    "station": null
+   }
+  }
+ },
+ "B2-010": {
+  "case": "unique",
+  "assignment": {}
+ },
+ "B2-011": {
+  "case": "unique",
+  "assignment": {}
+ },
+ "B2-012": {
+  "case": "unique",
+  "assignment": {
+   "Daniel": {
+    "block": "15:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "11:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Priya": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Nadia": {
+    "block": "09:00",
+    "station": "calibration"
+   }
+  }
+ },
+ "B2-013": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "11:00",
+    "station": "none"
+   },
+   "Tomas": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Ayesha": {
+    "block": "09:00",
+    "station": "none"
+   },
+   "Rohan": {
+    "block": "13:00",
+    "station": "none"
+   },
+   "Daniel": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-014": {
+  "case": "unique",
+  "assignment": {}
+ },
+ "B2-015": {
+  "case": "unique",
+  "assignment": {}
+ },
+ "B2-016": {
+  "case": "unique",
+  "assignment": {
+   "Tomas": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Ayesha": {
+    "block": "09:00",
+    "station": null
+   },
+   "Daniel": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Lukas": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Nadia": {
+    "block": "15:00",
+    "station": null
+   }
+  }
+ },
+ "B2-017": {
+  "case": "unique",
+  "assignment": {
+   "Priya": {
+    "block": "07:00",
+    "station": null
+   },
+   "Nadia": {
+    "block": "09:00",
+    "station": "calibration"
+   },
+   "Samuel": {
+    "block": "11:00",
+    "station": null
+   },
+   "Ingrid": {
+    "block": "13:00",
+    "station": "intake"
+   },
+   "Meera": {
+    "block": "15:00",
+    "station": null
+   }
+  }
+ },
+ "B2-018": {
+  "case": "unique",
+  "assignment": {
+   "Priya": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Daniel": {
+    "block": "09:00",
+    "station": "packing"
+   },
+   "Nadia": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Tomas": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Ayesha": {
+    "block": "15:00",
+    "station": "intake"
+   }
+  }
+ },
+ "B2-019": {
+  "case": "unique",
+  "assignment": {
+   "Daniel": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Samuel": {
+    "block": "09:00",
+    "station": null
+   },
+   "Nadia": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Priya": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Rohan": {
+    "block": "15:00",
+    "station": "intake"
+   }
+  }
+ },
+ "B2-020": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "09:00",
+    "station": "intake"
+   },
+   "Daniel": {
+    "block": "07:00",
+    "station": "packing"
+   },
+   "Priya": {
+    "block": "13:00",
+    "station": null
+   },
+   "Rohan": {
+    "block": "11:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "15:00",
+    "station": "calibration"
+   }
+  }
+ },
+ "B2-021": {
+  "case": "unique",
+  "assignment": {
+   "Lukas": {
+    "block": "07:00",
+    "station": null
+   },
+   "Daniel": {
+    "block": "09:00",
+    "station": "calibration"
+   },
+   "Ingrid": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Ayesha": {
+    "block": "13:00",
+    "station": null
+   },
+   "Samuel": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-022": {
+  "case": "unique",
+  "assignment": {
+   "Priya": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Samuel": {
+    "block": "09:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "11:00",
+    "station": "calibration",
+    "intake": false,
+    "standing_commitment": true
+   },
+   "Tomas": {
+    "block": "13:00",
+    "station": "packing",
+    "after_one_of": [
+     "Ingrid",
+     "Priya"
+    ],
+    "between_Ayesha_Ingrid": true
+   },
+   "Ingrid": {
+    "block": "15:00",
+    "station": "intake",
+    "car_shares": [
+     "Priya"
+    ]
+   }
+  }
+ },
+ "B2-023": {
+  "case": "unique",
+  "assignment": {}
+ },
+ "B2-024": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Ingrid": {
+    "block": "07:00",
+    "station": "calibration"
+   },
+   "Meera": "undefined",
+   "Priya": {
+    "block": "07:00",
+    "station": "undefined"
+   },
+   "Rohan": {
+    "block": "09:00",
+    "station": "undefined"
+   }
+  }
+ },
+ "B2-025": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "07:00",
+    "station": null
+   },
+   "Ingrid": {
+    "block": "09:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "11:00",
+    "station": "packing"
+   },
+   "Lukas": {
+    "block": "13:00",
+    "station": null
+   },
+   "Daniel": {
+    "block": "15:00",
+    "station": null
+   }
+  }
+ },
+ "B2-026": {
+  "case": "unique",
+  "assignment": {}
+ },
+ "B2-027": {
+  "case": "unique",
+  "assignment": {
+   "Ayesha": {
+    "block": "07:00",
+    "station": "packing"
+   },
+   "Meera": {
+    "block": "09:00",
+    "station": "calibration"
+   },
+   "Tomas": {
+    "block": "11:00",
+    "station": "packing"
+   },
+   "Nadia": {
+    "block": "13:00",
+    "station": "intake"
+   },
+   "Priya": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-028": {
+  "case": "unique",
+  "assignment": {
+   "Daniel": {
+    "block": "07:00",
+    "station": null
+   },
+   "Priya": {
+    "block": "09:00",
+    "station": "packing"
+   },
+   "Meera": {
+    "block": "11:00",
+    "station": null
+   },
+   "Tomas": {
+    "block": "13:00",
+    "station": "calibration"
+   },
+   "Lukas": {
+    "block": "15:00",
+    "station": "intake"
+   }
+  }
+ },
+ "B2-029": {
+  "case": "unique",
+  "assignment": {
+   "Lukas": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Tomas": {
+    "block": "09:00",
+    "station": "intake"
+   },
+   "Nadia": {
+    "block": "13:00",
+    "station": "none"
+   },
+   "Daniel": {
+    "block": "07:00",
+    "station": "calibration"
+   },
+   "Rohan": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-030": {
+  "case": "unique",
+  "assignment": {
+   "Rohan": {
+    "block": "09:00",
+    "station": null
+   },
+   "Ingrid": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Lukas": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Samuel": {
+    "block": "15:00",
+    "station": null
+   },
+   "Nadia": {
+    "block": "13:00",
+    "station": null
+   }
+  }
+ },
+ "B2-031": {
+  "case": "unique",
+  "assignment": {
+   "Priya": {
+    "block": "11:00",
+    "station": null
+   },
+   "Tomas": {
+    "block": "07:00",
+    "station": null
+   },
+   "Rohan": {
+    "block": "12:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "13:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "15:00",
+    "station": "calibration"
+   }
+  }
+ },
+ "B2-032": {
+  "case": "unique",
+  "assignment": {
+   "Daniel": {
+    "block": "13:00",
+    "station": "intake"
+   },
+   "Samuel": {
+    "block": "09:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "11:00",
+    "station": null
+   },
+   "Ingrid": {
+    "block": "07:00",
+    "station": "calibration"
+   },
+   "Rohan": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-033": {
+  "case": "unique",
+  "assignment": {
+   "Ingrid": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Tomas": {
+    "block": "09:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Lukas": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Samuel": {
+    "block": "15:00",
+    "station": null
+   }
+  }
+ },
+ "B2-034": {
+  "case": "unique",
+  "assignment": {
+   "Tomas": {
+    "block": "09:00",
+    "station": "none"
+   },
+   "Meera": {
+    "block": "13:00",
+    "station": "none"
+   },
+   "Ingrid": {
+    "block": "07:00",
+    "station": "none"
+   },
+   "Rohan": {
+    "block": "15:00",
+    "station": "calibration"
+   },
+   "Samuel": {
+    "block": "11:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-035": {
+  "case": "unique",
+  "assignment": {
+   "Tomas": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Samuel": {
+    "block": "09:00",
+    "station": "calibration"
+   },
+   "Daniel": {
+    "block": "11:00",
+    "station": "packing"
+   },
+   "Priya": {
+    "block": "13:00",
+    "station": "intake"
+   },
+   "Rohan": {
+    "block": "15:00",
+    "station": null
+   }
+  }
+ },
+ "B2-036": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "07:00",
+    "station": "packing"
+   },
+   "Meera": {
+    "block": "09:00",
+    "station": "intake"
+   },
+   "Rohan": {
+    "block": "11:00",
+    "station": "none"
+   },
+   "Daniel": {
+    "block": "13:00",
+    "station": "none"
+   },
+   "Samuel": {
+    "block": "15:00",
+    "station": "calibration"
+   }
+  }
+ },
+ "B2-037": {
+  "case": "unique",
+  "assignment": {}
+ },
+ "B2-038": {
+  "case": "unique",
+  "assignment": {
+   "Daniel": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Ayesha": {
+    "block": "15:00",
+    "station": null
+   },
+   "Ingrid": {
+    "block": "13:00",
+    "station": null
+   },
+   "Rohan": {
+    "block": "09:00",
+    "station": null
+   },
+   "Nadia": {
+    "block": "07:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-039": {
+  "case": "unique",
+  "assignment": {
+   "Ingrid": {
+    "block": "07:00",
+    "station": null
+   },
+   "Nadia": {
+    "block": "11:00",
+    "station": null
+   },
+   "Priya": {
+    "block": "13:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "15:00",
+    "station": "intake"
+   },
+   "Tomas": {
+    "block": "09:00",
+    "station": "calibration"
+   }
+  }
+ },
+ "B2-040": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "07:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "09:00",
+    "station": null
+   },
+   "Samuel": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Daniel": {
+    "block": "13:00",
+    "station": "intake"
+   },
+   "Meera": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-041": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "09:00",
+    "station": "intake"
+   },
+   "Meera": {
+    "block": "07:00",
+    "station": null
+   },
+   "Lukas": {
+    "block": "11:00",
+    "station": null
+   },
+   "Samuel": {
+    "block": "13:00",
+    "station": null
+   },
+   "Ingrid": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-042": {
+  "case": "unique",
+  "assignment": {
+   "Ayesha": {
+    "block": "07:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "09:00",
+    "station": "intake"
+   },
+   "Ingrid": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Lukas": {
+    "block": "13:00",
+    "station": null
+   },
+   "Tomas": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-043": {
+  "case": "unique",
+  "assignment": {
+   "Ingrid": {
+    "block": "09:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "07:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "11:00",
+    "station": null
+   },
+   "Rohan": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Daniel": {
+    "block": "15:00",
+    "station": "intake"
+   }
+  }
+ },
+ "B2-044": {
+  "case": "unique",
+  "assignment": {
+   "Priya": {
+    "block": "09:00",
+    "station": null
+   },
+   "Daniel": {
+    "block": "07:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Rohan": {
+    "block": "13:00",
+    "station": "calibration"
+   },
+   "Ingrid": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-045": {
+  "case": "unique",
+  "assignment": {
+   "Meera": {
+    "block": "07:00",
+    "station": null
+   },
+   "Samuel": {
+    "block": "15:00",
+    "station": "packing"
+   },
+   "Ayesha": {
+    "block": "09:00",
+    "station": "intake"
+   },
+   "Nadia": {
+    "block": "11:00",
+    "station": null
+   },
+   "Lukas": {
+    "block": "13:00",
+    "station": "calibration"
+   }
+  }
+ },
+ "B2-046": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Lukas": {
+    "block": "07:00",
+    "station": "packing"
+   },
+   "Samuel": {
+    "block": "09:00",
+    "station": "none"
+   },
+   "Ayesha": {
+    "block": "15:00",
+    "station": "calibration"
+   },
+   "Daniel": {
+    "block": "13:00",
+    "station": "none"
+   }
+  }
+ },
+ "B2-047": {
+  "case": "unique",
+  "assignment": {
+   "Meera": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Lukas": {
+    "block": "09:00",
+    "station": null
+   },
+   "Nadia": {
+    "block": "13:00",
+    "station": null
+   },
+   "Tomas": {
+    "block": "15:00",
+    "station": null
+   },
+   "Priya": {
+    "block": "11:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-048": {
+  "case": "unique",
+  "assignment": {
+   "Priya": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Samuel": {
+    "block": "09:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Rohan": {
+    "block": "13:00",
+    "station": null
+   },
+   "Lukas": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-049": {
+  "case": "unique",
+  "assignment": {
+   "Ayesha": {
+    "block": "11:00",
+    "station": null
+   },
+   "Tomas": {
+    "block": "07:00",
+    "station": null
+   },
+   "Ingrid": {
+    "block": "15:00",
+    "station": "packing"
+   },
+   "Rohan": {
+    "block": "13:00",
+    "station": "intake"
+   },
+   "Samuel": {
+    "block": "09:00",
+    "station": "calibration"
+   }
+  }
+ },
+ "B2-050": {
+  "case": "unique",
+  "assignment": {
+   "Rohan": {
+    "block": "07:00",
+    "station": "calibration"
+   },
+   "Nadia": {
+    "block": "09:00",
+    "station": null
+   },
+   "Ingrid": {
+    "block": "11:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "13:00",
+    "station": "intake"
+   },
+   "Tomas": {
+    "block": "15:00",
+    "station": null
+   }
+  }
+ },
+ "B2-051": {
+  "case": "unique",
+  "assignment": {
+   "Lukas": {
+    "block": "13:00",
+    "station": null
+   },
+   "Daniel": {
+    "block": "09:00",
+    "station": "calibration"
+   },
+   "Ayesha": {
+    "block": "07:00",
+    "station": null
+   },
+   "Meera": {
+    "block": "11:00",
+    "station": "packing"
+   },
+   "Priya": {
+    "block": "15:00",
+    "station": "intake"
+   }
+  }
+ },
+ "B2-052": {
+  "case": "unique",
+  "assignment": {
+   "Ingrid": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Priya": {
+    "block": "09:00",
+    "station": "packing"
+   },
+   "Daniel": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Rohan": {
+    "block": "13:00",
+    "station": "intake"
+   },
+   "Meera": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-053": {
+  "case": "unique",
+  "assignment": {
+   "Samuel": {
+    "block": "07:00",
+    "station": "intake"
+   },
+   "Priya": {
+    "block": "09:00",
+    "station": null
+   },
+   "Nadia": {
+    "block": "11:00",
+    "station": null
+   },
+   "Tomas": {
+    "block": "13:00",
+    "station": "calibration"
+   },
+   "Ingrid": {
+    "block": "15:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-054": {
+  "case": "unique",
+  "assignment": {
+   "Nadia": {
+    "block": "09:00",
+    "station": "intake"
+   },
+   "Ingrid": {
+    "block": "07:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "11:00",
+    "station": "calibration"
+   },
+   "Tomas": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Samuel": {
+    "block": "15:00",
+    "station": null
+   }
+  }
+ },
+ "B2-055": {
+  "case": "unique",
+  "assignment": {
+   "Ayesha": {
+    "block": "09:00",
+    "station": "intake"
+   },
+   "Samuel": {
+    "block": "15:00",
+    "station": null
+   },
+   "Lukas": {
+    "block": "11:00",
+    "station": null
+   },
+   "Ingrid": {
+    "block": "07:00",
+    "station": "calibration"
+   },
+   "Meera": {
+    "block": "13:00",
+    "station": "packing"
+   }
+  }
+ },
+ "B2-056": {
+  "case": "unique",
+  "assignment": {
+   "Ayesha": {
+    "block": "07:00",
+    "station": "calibration"
+   },
+   "Nadia": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Tomas": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Daniel": {
+    "block": "09:00",
+    "block2": "09:00",
+    "station": "none"
+   },
+   "Priya": {
+    "block": "15:00",
+    "station": "none"
+   }
+  }
+ },
+ "B2-057": {
+  "case": "unique",
+  "assignment": {
+   "Rohan": {
+    "block": "07:00",
+    "station": null
+   },
+   "Priya": {
+    "block": "09:00",
+    "station": null
+   },
+   "Ayesha": {
+    "block": "11:00",
+    "station": "packing"
+   },
+   "Ingrid": {
+    "block": "13:00",
+    "station": "calibration"
+   },
+   "Lukas": {
+    "block": "15:00",
+    "station": null
+   }
+  }
+ },
+ "B2-058": {
+  "case": "unique",
+  "assignment": {
+   "Ayesha": {
+    "block": "11:00",
+    "station": "intake"
+   },
+   "Ingrid": {
+    "block": "07:00",
+    "station": "calibration"
+   },
+   "Nadia": {
+    "block": "13:00",
+    "station": "packing"
+   },
+   "Rohan": {
+    "block": "15:00",
+    "station": "none"
+   },
+   "Meera": {
+    "block": "09:00",
+    "station": "none"
+   }
+  }
+ },
+ "B2-059": {
+  "case": "unique",
+  "assignment": {
+   "Ingrid": {
+    "block": "11:00",
+    "station": null
+   },
+   "Daniel": {
+    "block": "07:00",
+    "station": "packing"
+   },
+   "Meera": {
+    "block": "09:00",
+    "station": null
+   },
+   "Lukas": {
+    "block": "13:00",
+    "station": "intake"
+   },
+   "Nadia": {
+    "block": "15:00",
+    "station": "calibration"
+   }
+  }
+ }
+}

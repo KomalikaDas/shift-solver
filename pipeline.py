@@ -2,7 +2,8 @@
 
 Per item:
   1. read the header symbolically (names, blocks, stations)
-  2. prefilter: lines that mention no person, block or station go straight to NONE
+  2. (optional, off by default) prefilter: lines naming no person, block or
+     station go straight to NONE
   3. ask the model to translate each remaining line into the constraint language
   4. validate the model's output: known names only, and grounding (everything
      a constraint mentions must appear in its own line)
@@ -327,7 +328,10 @@ def replay_call_from(log_rows):
     return call
 
 
-DEFAULT_CFG = {"prefilter": True, "grounding": True, "last_answer": True, "disjunction": True, "examples": True, "noise_rules": True,
+# The prefilter (skip lines naming no person, block or station) is OFF: in three
+# comparisons it scored lower with it than without (1x endpoint 60.0 vs 65.0,
+# 1x local 57.8 vs 65.0, 3x local 60.0 vs 73.3). Kept as an option for the ablation.
+DEFAULT_CFG = {"prefilter": False, "grounding": True, "last_answer": True, "disjunction": True, "examples": True, "noise_rules": True,
                "vote": True, "plausibility": True, "direct": False}
 
 
@@ -338,17 +342,20 @@ def main(argv=None):
     ap.add_argument("--out", required=True)
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--log", default=None, help="where to save raw model replies (jsonl)")
-    for name in ("prefilter", "grounding", "last-answer", "disjunction", "examples", "noise-rules",
+    for name in ("grounding", "last-answer", "disjunction", "examples", "noise-rules",
                  "vote", "plausibility"):
         ap.add_argument(f"--no-{name}", action="store_true")
+    ap.add_argument("--prefilter", action="store_true",
+                    help="skip lines naming no person, block or station (off by default)")
     ap.add_argument("--direct", action="store_true", help="baseline: model answers directly")
     a = ap.parse_args(argv)
 
     cfg = dict(DEFAULT_CFG)
-    for name in ("prefilter", "grounding", "last_answer", "disjunction", "examples", "noise_rules",
+    for name in ("grounding", "last_answer", "disjunction", "examples", "noise_rules",
                  "vote", "plausibility"):
         if getattr(a, "no_" + name):
             cfg[name] = False
+    cfg["prefilter"] = a.prefilter
     cfg["direct"] = a.direct
 
     from llm import call

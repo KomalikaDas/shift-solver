@@ -20,8 +20,9 @@ import pipeline
 
 ap = argparse.ArgumentParser()
 ap.add_argument("log")
-for name in ("prefilter", "grounding", "last-answer", "disjunction", "vote", "plausibility"):
+for name in ("grounding", "last-answer", "disjunction", "vote", "plausibility"):
     ap.add_argument(f"--no-{name}", action="store_true")
+ap.add_argument("--prefilter", action="store_true", help="replay a run made with the prefilter on")
 a = ap.parse_args()
 
 replies = defaultdict(list)
@@ -41,9 +42,10 @@ def replay_call(item_id, messages):
 
 
 cfg = dict(pipeline.DEFAULT_CFG)
-for name in ("prefilter", "grounding", "last_answer", "disjunction", "vote", "plausibility"):
+for name in ("grounding", "last_answer", "disjunction", "vote", "plausibility"):
     if getattr(a, "no_" + name):
         cfg[name] = False
+cfg["prefilter"] = a.prefilter
 items = json.loads((ROOT / "data/items.json").read_text(encoding="utf-8"))
 answers, _ = pipeline.run(items, budget, cfg, replay_call, workers=1)
 

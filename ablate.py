@@ -27,7 +27,7 @@ import pipeline
 
 LIVE_ARMS = {
     "full system":          {},
-    "no prefilter":         {"prefilter": False},
+    "with prefilter":       {"prefilter": True},   # built, then removed
     "no worked example":    {"examples": False},
     "no noise rules":       {"noise_rules": False},
     "direct (no harness)":  {"direct": True},
@@ -121,7 +121,7 @@ def main():
                 record(arm, budget, r, answers, log)
 
     budgets = ["1x", "3x", "10x"]
-    rows = ["| component switched off | how measured | " + " | ".join(budgets) + " |",
+    rows = ["| change from the submitted system | how measured | " + " | ".join(budgets) + " |",
             "|---|---|" + "---|" * len(budgets)]
     for arm in ORDER:
         how = "replay of full-system replies" if arm in REPLAY_ARMS else "live run"
