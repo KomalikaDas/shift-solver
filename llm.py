@@ -12,11 +12,12 @@ import json
 import os
 import re
 import urllib.request
+import zlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 SETTINGS = ("OPENROUTER_API_KEY", "OPENROUTER_BASE_URL", "MODEL",
-            "LLM_BACKEND", "OLLAMA_URL", "OLLAMA_MODEL")
+            "LLM_BACKEND", "OLLAMA_URL", "OLLAMA_MODEL", "OLLAMA_NUM_CTX")
 
 
 def load_env():
@@ -64,14 +65,19 @@ def _openrouter(item_id, messages, max_tokens):
 
 
 def _ollama(item_id, messages, max_tokens):
-    url = _env.get("OLLAMA_URL", "http://localhost:11434").rstrip("/") + "/api/chat"
+    # OLLAMA_URL may list several servers, comma-separated (one per GPU).
+    # Each item always goes to the same server, chosen from its id.
+    urls = [u.strip().rstrip("/") for u in
+            _env.get("OLLAMA_URL", "http://localhost:11434").split(",") if u.strip()]
+    url = urls[zlib.crc32(item_id.encode("utf-8")) % len(urls)] + "/api/chat"
     body = {
         "model": _env.get("OLLAMA_MODEL", "granite4.2:8b-q8_0"),
         "messages": messages,
         "stream": False,
         "think": False,  # non-thinking mode, as the brief requires
         "options": {"temperature": 1.0, "top_p": 0.95,
-                    "num_predict": max_tokens, "num_ctx": 8192},
+                    "num_predict": max_tokens,
+                    "num_ctx": int(_env.get("OLLAMA_NUM_CTX", "6144"))},
     }
     req = urllib.request.Request(url, data=json.dumps(body).encode("utf-8"),
                                  headers={"Content-Type": "application/json",
