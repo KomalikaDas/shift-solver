@@ -1,0 +1,936 @@
+{
+ "full system": {
+  "1x": [
+   {
+    "macro": 0.5333,
+    "per_case": {
+     "unique": 0.5,
+     "ambiguous": 0.5,
+     "inconsistent": 0.6
+    },
+    "confusion": {
+     "unique": {
+      "unique": 12,
+      "ambiguous": 6,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 17,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 0,
+      "inconsistent": 18,
+      "unparsed": 0
+     }
+    }
+   },
+   {
+    "macro": 0.5667,
+    "per_case": {
+     "unique": 0.7,
+     "ambiguous": 0.5,
+     "inconsistent": 0.5
+    },
+    "confusion": {
+     "unique": {
+      "unique": 14,
+      "ambiguous": 3,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 17,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 3,
+      "ambiguous": 2,
+      "inconsistent": 15,
+      "unparsed": 0
+     }
+    }
+   },
+   {
+    "macro": 0.65,
+    "per_case": {
+     "unique": 0.7,
+     "ambiguous": 0.55,
+     "inconsistent": 0.7
+    },
+    "confusion": {
+     "unique": {
+      "unique": 15,
+      "ambiguous": 3,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 16,
+      "inconsistent": 4,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 1,
+      "ambiguous": 2,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "3x": [
+   {
+    "macro": 0.75,
+    "per_case": {
+     "unique": 0.8,
+     "ambiguous": 0.7,
+     "inconsistent": 0.75
+    },
+    "confusion": {
+     "unique": {
+      "unique": 17,
+      "ambiguous": 3,
+      "inconsistent": 0,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 16,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 3,
+      "ambiguous": 1,
+      "inconsistent": 16,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "10x": [
+   {
+    "macro": 0.7667,
+    "per_case": {
+     "unique": 0.75,
+     "ambiguous": 0.75,
+     "inconsistent": 0.8
+    },
+    "confusion": {
+     "unique": {
+      "unique": 15,
+      "ambiguous": 3,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 18,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 1,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ },
+ "no grounding": {
+  "1x": [
+   {
+    "macro": 0.5,
+    "per_case": {
+     "unique": 0.5,
+     "ambiguous": 0.5,
+     "inconsistent": 0.5
+    },
+    "confusion": {
+     "unique": {
+      "unique": 12,
+      "ambiguous": 6,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 16,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 0,
+      "inconsistent": 18,
+      "unparsed": 0
+     }
+    }
+   },
+   {
+    "macro": 0.55,
+    "per_case": {
+     "unique": 0.7,
+     "ambiguous": 0.5,
+     "inconsistent": 0.45
+    },
+    "confusion": {
+     "unique": {
+      "unique": 14,
+      "ambiguous": 3,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 17,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 3,
+      "ambiguous": 2,
+      "inconsistent": 15,
+      "unparsed": 0
+     }
+    }
+   },
+   {
+    "macro": 0.5833,
+    "per_case": {
+     "unique": 0.65,
+     "ambiguous": 0.5,
+     "inconsistent": 0.6
+    },
+    "confusion": {
+     "unique": {
+      "unique": 14,
+      "ambiguous": 3,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 14,
+      "inconsistent": 5,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 1,
+      "ambiguous": 2,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "3x": [
+   {
+    "macro": 0.7,
+    "per_case": {
+     "unique": 0.75,
+     "ambiguous": 0.7,
+     "inconsistent": 0.65
+    },
+    "confusion": {
+     "unique": {
+      "unique": 16,
+      "ambiguous": 3,
+      "inconsistent": 1,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 16,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 3,
+      "ambiguous": 1,
+      "inconsistent": 16,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "10x": [
+   {
+    "macro": 0.7,
+    "per_case": {
+     "unique": 0.7,
+     "ambiguous": 0.7,
+     "inconsistent": 0.7
+    },
+    "confusion": {
+     "unique": {
+      "unique": 14,
+      "ambiguous": 3,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 17,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 1,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ },
+ "no last-answer parse": {
+  "1x": [
+   {
+    "macro": 0.5,
+    "per_case": {
+     "unique": 0.45,
+     "ambiguous": 0.45,
+     "inconsistent": 0.6
+    },
+    "confusion": {
+     "unique": {
+      "unique": 11,
+      "ambiguous": 5,
+      "inconsistent": 4,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 16,
+      "inconsistent": 4,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 1,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   },
+   {
+    "macro": 0.5333,
+    "per_case": {
+     "unique": 0.65,
+     "ambiguous": 0.5,
+     "inconsistent": 0.45
+    },
+    "confusion": {
+     "unique": {
+      "unique": 14,
+      "ambiguous": 3,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 17,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 3,
+      "ambiguous": 2,
+      "inconsistent": 15,
+      "unparsed": 0
+     }
+    }
+   },
+   {
+    "macro": 0.6333,
+    "per_case": {
+     "unique": 0.65,
+     "ambiguous": 0.55,
+     "inconsistent": 0.7
+    },
+    "confusion": {
+     "unique": {
+      "unique": 13,
+      "ambiguous": 4,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 16,
+      "inconsistent": 4,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 1,
+      "ambiguous": 2,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "3x": [
+   {
+    "macro": 0.6833,
+    "per_case": {
+     "unique": 0.75,
+     "ambiguous": 0.55,
+     "inconsistent": 0.75
+    },
+    "confusion": {
+     "unique": {
+      "unique": 16,
+      "ambiguous": 3,
+      "inconsistent": 1,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 15,
+      "inconsistent": 4,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 3,
+      "ambiguous": 1,
+      "inconsistent": 16,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "10x": [
+   {
+    "macro": 0.7667,
+    "per_case": {
+     "unique": 0.8,
+     "ambiguous": 0.7,
+     "inconsistent": 0.8
+    },
+    "confusion": {
+     "unique": {
+      "unique": 17,
+      "ambiguous": 2,
+      "inconsistent": 1,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 17,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 1,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ },
+ "no disjunction": {
+  "1x": [
+   {
+    "macro": 0.5167,
+    "per_case": {
+     "unique": 0.5,
+     "ambiguous": 0.45,
+     "inconsistent": 0.6
+    },
+    "confusion": {
+     "unique": {
+      "unique": 12,
+      "ambiguous": 6,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 17,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 0,
+      "inconsistent": 18,
+      "unparsed": 0
+     }
+    }
+   },
+   {
+    "macro": 0.5667,
+    "per_case": {
+     "unique": 0.7,
+     "ambiguous": 0.5,
+     "inconsistent": 0.5
+    },
+    "confusion": {
+     "unique": {
+      "unique": 14,
+      "ambiguous": 3,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 17,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 3,
+      "ambiguous": 2,
+      "inconsistent": 15,
+      "unparsed": 0
+     }
+    }
+   },
+   {
+    "macro": 0.6333,
+    "per_case": {
+     "unique": 0.65,
+     "ambiguous": 0.55,
+     "inconsistent": 0.7
+    },
+    "confusion": {
+     "unique": {
+      "unique": 14,
+      "ambiguous": 4,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 16,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 1,
+      "ambiguous": 2,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "3x": [
+   {
+    "macro": 0.7667,
+    "per_case": {
+     "unique": 0.8,
+     "ambiguous": 0.75,
+     "inconsistent": 0.75
+    },
+    "confusion": {
+     "unique": {
+      "unique": 17,
+      "ambiguous": 3,
+      "inconsistent": 0,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 17,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 3,
+      "ambiguous": 1,
+      "inconsistent": 16,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "10x": [
+   {
+    "macro": 0.7667,
+    "per_case": {
+     "unique": 0.75,
+     "ambiguous": 0.75,
+     "inconsistent": 0.8
+    },
+    "confusion": {
+     "unique": {
+      "unique": 15,
+      "ambiguous": 3,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 18,
+      "inconsistent": 1,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 1,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ },
+ "with prefilter": {
+  "1x": [
+   {
+    "macro": 0.5833,
+    "per_case": {
+     "unique": 0.55,
+     "ambiguous": 0.7,
+     "inconsistent": 0.5
+    },
+    "confusion": {
+     "unique": {
+      "unique": 11,
+      "ambiguous": 8,
+      "inconsistent": 1,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 19,
+      "inconsistent": 1,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 4,
+      "inconsistent": 14,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "3x": [
+   {
+    "macro": 0.6333,
+    "per_case": {
+     "unique": 0.75,
+     "ambiguous": 0.65,
+     "inconsistent": 0.5
+    },
+    "confusion": {
+     "unique": {
+      "unique": 16,
+      "ambiguous": 4,
+      "inconsistent": 0,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 18,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 3,
+      "ambiguous": 3,
+      "inconsistent": 14,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ },
+ "no worked example": {
+  "1x": [
+   {
+    "macro": 0.4167,
+    "per_case": {
+     "unique": 0.5,
+     "ambiguous": 0.3,
+     "inconsistent": 0.45
+    },
+    "confusion": {
+     "unique": {
+      "unique": 10,
+      "ambiguous": 8,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 17,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 1,
+      "ambiguous": 8,
+      "inconsistent": 11,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "3x": [
+   {
+    "macro": 0.6333,
+    "per_case": {
+     "unique": 0.65,
+     "ambiguous": 0.6,
+     "inconsistent": 0.65
+    },
+    "confusion": {
+     "unique": {
+      "unique": 13,
+      "ambiguous": 5,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 16,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 1,
+      "ambiguous": 4,
+      "inconsistent": 15,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ },
+ "no noise rules": {
+  "1x": [
+   {
+    "macro": 0.35,
+    "per_case": {
+     "unique": 0.45,
+     "ambiguous": 0.25,
+     "inconsistent": 0.35
+    },
+    "confusion": {
+     "unique": {
+      "unique": 9,
+      "ambiguous": 1,
+      "inconsistent": 10,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 2,
+      "ambiguous": 8,
+      "inconsistent": 10,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 2,
+      "inconsistent": 16,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "3x": [
+   {
+    "macro": 0.45,
+    "per_case": {
+     "unique": 0.5,
+     "ambiguous": 0.3,
+     "inconsistent": 0.55
+    },
+    "confusion": {
+     "unique": {
+      "unique": 13,
+      "ambiguous": 1,
+      "inconsistent": 6,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 2,
+      "ambiguous": 9,
+      "inconsistent": 9,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 1,
+      "ambiguous": 0,
+      "inconsistent": 19,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ },
+ "direct (no harness)": {
+  "1x": [
+   {
+    "macro": 0.0,
+    "per_case": {
+     "unique": 0.0,
+     "ambiguous": 0.0,
+     "inconsistent": 0.0
+    },
+    "confusion": {
+     "unique": {
+      "unique": 20,
+      "ambiguous": 0,
+      "inconsistent": 0,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 20,
+      "ambiguous": 0,
+      "inconsistent": 0,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 20,
+      "ambiguous": 0,
+      "inconsistent": 0,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ },
+ "no vote": {
+  "3x": [
+   {
+    "macro": 0.7,
+    "per_case": {
+     "unique": 0.7,
+     "ambiguous": 0.65,
+     "inconsistent": 0.75
+    },
+    "confusion": {
+     "unique": {
+      "unique": 15,
+      "ambiguous": 3,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 16,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 2,
+      "inconsistent": 16,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "10x": [
+   {
+    "macro": 0.7333,
+    "per_case": {
+     "unique": 0.8,
+     "ambiguous": 0.65,
+     "inconsistent": 0.75
+    },
+    "confusion": {
+     "unique": {
+      "unique": 16,
+      "ambiguous": 4,
+      "inconsistent": 0,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 16,
+      "inconsistent": 4,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 1,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ },
+ "no plausibility": {
+  "3x": [
+   {
+    "macro": 0.7167,
+    "per_case": {
+     "unique": 0.8,
+     "ambiguous": 0.65,
+     "inconsistent": 0.7
+    },
+    "confusion": {
+     "unique": {
+      "unique": 17,
+      "ambiguous": 3,
+      "inconsistent": 0,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 1,
+      "ambiguous": 16,
+      "inconsistent": 3,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 1,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ],
+  "10x": [
+   {
+    "macro": 0.7167,
+    "per_case": {
+     "unique": 0.75,
+     "ambiguous": 0.7,
+     "inconsistent": 0.7
+    },
+    "confusion": {
+     "unique": {
+      "unique": 15,
+      "ambiguous": 3,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "ambiguous": {
+      "unique": 0,
+      "ambiguous": 18,
+      "inconsistent": 2,
+      "unparsed": 0
+     },
+     "inconsistent": {
+      "unique": 2,
+      "ambiguous": 1,
+      "inconsistent": 17,
+      "unparsed": 0
+     }
+    }
+   }
+  ]
+ }
+}
